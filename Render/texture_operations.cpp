@@ -1,6 +1,7 @@
 #include <texture_operations.hpp>
 // Other Libs
 #include <FreeImage.h>
+#include <render.hpp>
 
 // This function loads a texture from file. Note: texture loading functions like these are usually 
 // managed by a 'Resource Manager' that manages all resources (like textures, models, audio). 
@@ -36,4 +37,40 @@ GLuint load_texture(GLchar const * name) {
 	FreeImage_Unload(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	return texture;
+}
+
+GLuint generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
+	// What enum to use?
+	GLenum attachment_type;
+	if (!depth && !stencil) {
+		attachment_type = GL_RGB;
+	}
+	else {
+		if (depth && !stencil) {
+			attachment_type = GL_DEPTH_COMPONENT;
+		}
+		else {
+			if (!depth && stencil) {
+				attachment_type = GL_STENCIL_INDEX;
+			}
+		}
+	}
+	//Generate texture ID and load texture data 
+	GLuint textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	if (!depth && !stencil) {
+		glTexImage2D(GL_TEXTURE_2D, 0, attachment_type, get_scr_width(), get_scr_height(),
+			0, attachment_type, GL_UNSIGNED_BYTE, NULL);
+	}
+	else {
+		// Using both a stencil and depth test, needs special format arguments
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, get_scr_width(), get_scr_height(),
+			0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+	}
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	return textureID;
 }

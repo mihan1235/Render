@@ -5,6 +5,7 @@ namespace {
 	// Options
 	GLboolean shadows = true;
 	GLboolean normalMapping = true;
+	GLboolean effect = false;
 }
 
 
@@ -37,6 +38,12 @@ void react_on_keys()
 	{
 		normalMapping = !normalMapping;
 		keysPressed[GLFW_KEY_N] = true;
+	}
+
+	if (keys[GLFW_KEY_V] && !keysPressed[GLFW_KEY_V])
+	{
+		effect = !effect;
+		keysPressed[GLFW_KEY_V] = true;
 	}
 }
 
@@ -89,4 +96,8 @@ GLboolean& get_shadow_option() {
 
 GLboolean& get_normal_map_option() {
 	return normalMapping;
+}
+
+GLboolean& get_effect_option() {
+	return effect;
 }

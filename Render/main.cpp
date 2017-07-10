@@ -18,6 +18,7 @@
 #include <vector>
 
 #include <resource_manager.hpp>
+#include <screen_buffer_object.hpp>
 
 // Global variables
 GLuint woodTexture;
@@ -67,6 +68,9 @@ int main()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+	ScreenBufferObject screen_buffer;
+
 	while (!glfwWindowShouldClose(window))
 	{
 		set_frame_time();
@@ -103,6 +107,7 @@ int main()
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		// 2. Render scene as normal 
+
 		glViewport(0, 0, get_scr_width(), get_scr_height());
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shader.Use();
@@ -122,7 +127,11 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, woodTexture);*/
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
+		screen_buffer.bind_to_our_framebuffer();
 		res_manager.draw_objects(shader);
+		glFlush();
+		screen_buffer.bind_to_default_framebuffer();
+		screen_buffer.draw();
 		// Swap the buffers
 		glfwSwapBuffers(window);
 	}
