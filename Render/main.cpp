@@ -37,8 +37,8 @@ int main()
 	set_cursor(window);
 	init_glew();
 	setup_opengl(window);
-	ResourceManager res_manager;
-	res_manager.init_objects();
+	//ResourceManager res_manager;
+	init_objects();
 	Shader shader = Shader("point_shadows.vert", "point_shadows.frag");
 	Shader simpleDepthShader = Shader("point_shadows_depth.vert", "point_shadows_depth.frag", "point_shadows_depth.geom");
 	// Set texture samples
@@ -103,7 +103,7 @@ int main()
 			glUniformMatrix4fv(glGetUniformLocation(simpleDepthShader.Program, ("shadowTransforms[" + std::to_string(i) + "]").c_str()), 1, GL_FALSE, glm::value_ptr(shadowTransforms[i]));
 		glUniform1f(glGetUniformLocation(simpleDepthShader.Program, "far_plane"), far);
 		glUniform3fv(glGetUniformLocation(simpleDepthShader.Program, "lightPos"), 1, &lightPos[0]);
-		res_manager.draw_objects(simpleDepthShader);
+		draw_objects(simpleDepthShader);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		// 2. Render scene as normal 
@@ -128,7 +128,7 @@ int main()
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
 		screen_buffer.bind_to_our_framebuffer();
-		res_manager.draw_objects(shader);
+		draw_objects(shader);
 		glFlush();
 		screen_buffer.bind_to_default_framebuffer();
 		screen_buffer.draw();

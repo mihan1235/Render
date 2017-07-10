@@ -8,6 +8,7 @@ namespace {
 	Camera camera(glm::vec3(0.0f, 3.0f, 3.0f));
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
+	bool glew_init = false;
 }
 
 int get_scr_width() {
@@ -30,7 +31,7 @@ void init_glfw() {
 GLFWwindow*  create_window() {
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "GLFW Proba", monitor, NULL);
+	GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Render", monitor, NULL);
 	glfwMakeContextCurrent(window);
 	return window;
 }
@@ -48,9 +49,12 @@ void set_cursor(GLFWwindow* window) {
 }
 
 void init_glew() {
-	// Initialize GLEW to setup the OpenGL Function pointers
-	glewExperimental = GL_TRUE;
-	glewInit();
+	if (glew_init == false) {
+		// Initialize GLEW to setup the OpenGL Function pointers
+		glewExperimental = GL_TRUE;
+		glewInit();
+		glew_init = true;
+	}
 }
 
 void setup_opengl(GLFWwindow* window) {

@@ -20,7 +20,7 @@ public:
 	//void add_objects_to_physics_manager(PhysicsManager&);
 	void init_objects();
 	~ResourceManager();
-	Shader& get_shader_ref(const char* name);
+	//Shader& get_shader_ref(const char* name);
 	Model& get_model_ref(const char* name);
 private:
 	void init_models();
@@ -29,3 +29,6 @@ private:
 protected:
 		
 };
+
+void init_objects();
+void draw_objects(Shader& shader);

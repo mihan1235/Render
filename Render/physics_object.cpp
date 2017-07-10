@@ -1,21 +1,13 @@
 #include <physics_object.hpp>
 
-using namespace kr;
 
-PhysicsObject::PhysicsObject(btCollisionShape* shape,float mass,
-							 glm::vec3 position,
-							 glm::mat4 scale,glm::mat4 rotate)
+
+PhysicsObject::PhysicsObject(glm::vec3 position,btCollisionShape* shape,float mass) :Object(position)
 {
 	this->shape=shape;
 	this->mass=mass;
-	this->scale=scale;
-	this->rotate=rotate;
-	default_position=position;
+	this->default_position = position;
 };
-
-//void PhysicsObject::draw(){
-//    obj->draw(get_model()*scale*rotate);    
-//}
 
 glm::mat4 PhysicsObject::get_model() {
     return glm::translate(glm::mat4(), position()) * glm::mat4_cast(orientation());

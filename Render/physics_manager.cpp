@@ -2,8 +2,9 @@
 #include <cstdio>
 #include <render.hpp>
 
-
-using namespace kr;
+namespace {
+	PhysicsManager physics_manager;
+}
 
 PhysicsManager::PhysicsManager(){
 	///collision configuration contains default setup for memory, 
@@ -104,3 +105,12 @@ PhysicsManager::~PhysicsManager(){
 	delete dispatcher;
 	delete collisionConfiguration;
 };
+
+
+void start_simulation_step() {
+	physics_manager.start_simulation_step();
+}
+
+void add_rigid_body(PhysicsObject* physics_obj) {
+	physics_manager.add_rigid_body(physics_obj);
+}

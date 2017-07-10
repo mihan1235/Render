@@ -1,5 +1,13 @@
 
 #include <resource_manager.hpp>
+#include <render.hpp>
+
+using namespace glm;
+
+namespace{
+	ResourceManager res_manager;
+}
+
 
 ResourceManager::ResourceManager(){
 
@@ -25,68 +33,42 @@ void ResourceManager::draw_objects(Shader& shader_program) {
 
 void ResourceManager::init_objects() {
 	init_models();
-	glm::mat4 model = glm::mat4();
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-	Object* tmp = new Object(model);
+	Object* tmp = new Object(vec3(0.0f, 0.0f, 0.0f));
 	tmp->set_model(model_map["quard"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(-4.0f, 3.5f, -8.0));
-	tmp = new Object(model);
+	tmp = new Object(vec3(-4.0f, 3.5f, -8.0));
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(4.0f, 3.0f, 1.0));
-	tmp = new Object(model);
+	tmp = new Object(vec3(4.0f, 3.0f, 1.0));
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(-3.0f, 1.0f, -8.0));
-	tmp = new Object(model);
+	tmp = new Object(vec3(-3.0f, 1.0f, -8.0));
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(2.5f, 5.2f, 1.5));
-	tmp = new Object(model);
+	tmp = new Object(vec3(2.5f, 5.2f, 1.5));
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(6.5f, 5.0f, -3.0));
-	model = glm::rotate(model, 60.0f, glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
-	tmp = new Object(model);
+	tmp = new Object(vec3(6.5f, 5.0f, -3.0));
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(-6.0f, 0.1f, 0.0));
-	//model = glm::rotate(model, 60.0f, glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
-	//model = glm::scale(model, glm::vec3(1.5));
-	tmp = new Object(model);
+	tmp = new Object(vec3(-6.0f, 0.1f, 0.0));
 	tmp->set_model(model_map["zil_131"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(-2.0f, 0.1f, 0.0f));
-	//model = glm::rotate(model, 60.0f, glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
-	//model = glm::scale(model, glm::vec3(1.5));
-	tmp = new Object(model);
+	tmp = new Object(vec3(-2.0f, 0.1f, 0.0f));
 	tmp->set_model(model_map["trash_benzovoz_gaz_lod"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	model = glm::mat4();
-	model = glm::translate(model, glm::vec3(-2.0f, 0.2f, 8.0f));
-	//model = glm::rotate(model, 60.0f, glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
-	//model = glm::scale(model, glm::vec3(1.5));
-	tmp = new Object(model);
+	tmp = new Object(vec3(-2.0f, 0.2f, 8.0f));
 	tmp->set_model(model_map["veh_moskvitch_u_01"]);
 	object_arr.push_back(tmp);
 
@@ -141,7 +123,7 @@ ResourceManager::~ResourceManager(){
 //			shader_map["cube"],
 //			glm::vec3(0.0f, 5.0f, 0.0f), 
 //			"wall_house_red_02.dds",
-//			glm::scale(glm::mat4(), glm::vec3(2.0f, 2.0f, 2.0f))
+//			glm::scale(glm::mat4(),vec3(2.0f, 2.0f, 2.0f))
 //		));
 //	object_arr.push_back(
 //		new TexturedRectangle(new btBoxShape(btVector3(500, 0, 500)),
@@ -150,7 +132,15 @@ ResourceManager::~ResourceManager(){
 //			shader_map["cube"],
 //			glm::vec3(0.0f, 0.0f, 0.0f),
 //			"ston_asfalt_a.dds",
-//			glm::scale(glm::mat4(), glm::vec3(500.0f, 500.0f, 500.0f)),
-//			glm::rotate(glm::mat4(), glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f))
+//			glm::scale(glm::mat4(),vec3(500.0f, 500.0f, 500.0f)),
+//			glm::rotate(glm::mat4(),radians(-90.0f),vec3(1.0f, 0.0f, 0.0f))
 //		));
 //}
+
+void init_objects() {
+	res_manager.init_objects();
+}
+
+void draw_objects(Shader& shader) {
+	res_manager.draw_objects(shader);
+}
