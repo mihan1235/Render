@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <physics_object.hpp>
+#include <object.hpp>
 
 namespace kr{
 	class PhysicsManager{

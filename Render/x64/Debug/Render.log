@@ -1,5 +1,2 @@
-﻿  screen_buffer_object.cpp
-c:\users\mihan\visual_studio_2015_projects\projects\render\render\shader.h(62): warning C4101: infoLog: неиспользованная локальная переменная
-c:\users\mihan\visual_studio_2015_projects\projects\render\render\shader.h(61): warning C4101: success: неиспользованная локальная переменная
-  Render.vcxproj -> C:\Users\Mihan\Visual_Studio_2015_Projects\Projects\Render\x64\Debug\Render.exe
+﻿  Render.vcxproj -> C:\Users\Mihan\Visual_Studio_2015_Projects\Projects\Render\x64\Debug\Render.exe
   Render.vcxproj -> C:\Users\Mihan\Visual_Studio_2015_Projects\Projects\Render\x64\Debug\Render.pdb (Partial PDB)
