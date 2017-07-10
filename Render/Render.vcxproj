@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0E2A4AED-DF5C-4A05-8B88-4DE605740D88}</ProjectGuid>
+    <RootNamespace>Render</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\;$(ProjectDir)\ext\;$(ProjectDir)\ext\glew\include;$(ProjectDir)\ext\glfw\include;$(ProjectDir)\ext\freeimage\include;$(ProjectDir)\ext\glm;$(ProjectDir)\ext\bullet\include;$(ProjectDir)\ext\assimp\include;$(ProjectDir)\core;$(ProjectDir)\core\camera;$(ProjectDir)\core\core_errors;$(ProjectDir)\core\depth_buffer;$(ProjectDir)\core\keyboard_manager;$(ProjectDir)\core\mouse_manager;$(ProjectDir)\core\physics_manager;$(ProjectDir)\core\resource_manager;$(ProjectDir)\core\screen_buffer_object;$(ProjectDir)\core\camera\camera_movement;$(ProjectDir)\core\mouse_manager\cursor_position;$(ProjectDir)\core\mouse_manager\scroll_offset;$(ProjectDir)\core\physics_manager\physics_object;$(ProjectDir)\core\resource_manager\object;$(ProjectDir)\core\resource_manager\object\render;$(ProjectDir)\core\resource_manager\object\shader_program;$(ProjectDir)\error;$(ProjectDir)\objects\cube;$(ProjectDir)\objects\rectangle;$(ProjectDir)\objects\textured_rectangle;$(ProjectDir)\operations;$(ProjectDir)\renders\lamp_cube;$(ProjectDir)\renders\triangle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(ProjectDir)\ext\;$(ProjectDir)\ext\glew\lib\Release\x64\;$(ProjectDir)\ext\freeimage\lib\x64\;$(ProjectDir)\ext\glfw\lib;$(ProjectDir)\ext\bullet\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;FreeImage.lib;glfw3dll.lib;Bullet2FileLoader_Debug.lib;Bullet3Collision_Debug.lib;Bullet3Common_Debug.lib;Bullet3Dynamics_Debug.lib;Bullet3Geometry_Debug.lib;Bullet3OpenCL_clew_Debug.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletExampleBrowserLib_Debug.lib;BulletFileLoader_Debug.lib;BulletInverseDynamics_Debug.lib;BulletInverseDynamicsUtils_Debug.lib;BulletSoftBody_Debug.lib;BulletWorldImporter_Debug.lib;BulletXmlWorldImporter_Debug.lib;BussIK_Debug.lib;ConvexDecomposition_Debug.lib;GIMPACTUtils_Debug.lib;gtest_Debug.lib;gwen_Debug.lib;HACD_Debug.lib;LinearMath_Debug.lib;OpenGLWindow_Debug.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="core\camera\camera.cpp" />
+    <ClCompile Include="core\core.cpp" />
+    <ClCompile Include="core\core_errors\core_error.cpp" />
+    <ClCompile Include="core\depth_buffer\depth_buffer.cpp" />
+    <ClCompile Include="core\keyboard_manager\keyboard_manager.cpp" />
+    <ClCompile Include="core\mouse_manager\mouse_manager.cpp" />
+    <ClCompile Include="core\physics_manager\physics_manager.cpp" />
+    <ClCompile Include="core\physics_manager\physics_object\physics_object.cpp" />
+    <ClCompile Include="core\resource_manager\object\object.cpp" />
+    <ClCompile Include="core\resource_manager\object\render\render.cpp" />
+    <ClCompile Include="core\resource_manager\object\shader_program\shader_program.cpp" />
+    <ClCompile Include="core\resource_manager\resource_manager.cpp" />
+    <ClCompile Include="core\screen_buffer_object\screen_buffer_object.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="objects\cube\cube.cpp" />
+    <ClCompile Include="objects\rectangle\rectangle.cpp" />
+    <ClCompile Include="objects\textured_rectangle\textured_rectangle.cpp" />
+    <ClCompile Include="operations\file_operations.cpp" />
+    <ClCompile Include="operations\light.cpp" />
+    <ClCompile Include="operations\textures_operations.cpp" />
+    <ClCompile Include="renders\lamp_cube\lamp_cube.cpp" />
+    <ClCompile Include="renders\triangle\triangle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\camera\camera.hpp" />
+    <ClInclude Include="core\camera\camera_movement\camera_movement.hpp" />
+    <ClInclude Include="core\core.hpp" />
+    <ClInclude Include="core\core_errors\core_error.hpp" />
+    <ClInclude Include="core\depth_buffer\depth_buffer.hpp" />
+    <ClInclude Include="core\keyboard_manager\keyboard_manager.hpp" />
+    <ClInclude Include="core\mouse_manager\cursor_position\cursor_position.hpp" />
+    <ClInclude Include="core\mouse_manager\mouse_manager.hpp" />
+    <ClInclude Include="core\mouse_manager\scroll_offset\scroll_offset.hpp" />
+    <ClInclude Include="core\physics_manager\physics_manager.hpp" />
+    <ClInclude Include="core\physics_manager\physics_object\physics_object.hpp" />
+    <ClInclude Include="core\resource_manager\object\object.hpp" />
+    <ClInclude Include="core\resource_manager\object\render\render.hpp" />
+    <ClInclude Include="core\resource_manager\object\shader_program\shader_program.hpp" />
+    <ClInclude Include="core\resource_manager\object\shader_program\shader_type.hpp" />
+    <ClInclude Include="core\resource_manager\resource_manager.hpp" />
+    <ClInclude Include="core\screen_buffer_object\screen_buffer_object.hpp" />
+    <ClInclude Include="error\error.hpp" />
+    <ClInclude Include="objects\cube\cube.hpp" />
+    <ClInclude Include="objects\rectangle\rectangle.hpp" />
+    <ClInclude Include="objects\textured_rectangle\textured_rectangle.hpp" />
+    <ClInclude Include="operations\file_operations.hpp" />
+    <ClInclude Include="operations\light.hpp" />
+    <ClInclude Include="operations\texture_operations.hpp" />
+    <ClInclude Include="renders\lamp_cube\lamp_cube.hpp" />
+    <ClInclude Include="renders\triangle\triangle.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

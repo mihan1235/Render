@@ -1,0 +1,2 @@
+/home/mihan/Шаблоны/cg-samples-master/ext/glm/CMakeFiles/edit_cache.dir
+/home/mihan/Шаблоны/cg-samples-master/ext/glm/CMakeFiles/rebuild_cache.dir
