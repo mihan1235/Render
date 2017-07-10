@@ -7,3 +7,4 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void react_on_keys();
 
 GLboolean& get_shadow_option();
+GLboolean& get_normal_map_option();

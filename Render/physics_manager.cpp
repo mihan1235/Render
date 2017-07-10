@@ -1,5 +1,6 @@
 #include <physics_manager.hpp>
 #include <cstdio>
+#include <render.hpp>
 
 
 using namespace kr;
@@ -24,8 +25,8 @@ PhysicsManager::PhysicsManager(){
 };
 
 void PhysicsManager::start_simulation_step(){
-	//dynamicsWorld->stepSimulation(Core::get_delta_time()/3,10);
-	dynamicsWorld->stepSimulation(Core::get_delta_time(), 10);
+	//dynamicsWorld->stepSimulation(get_delta_time()/3,10);
+	dynamicsWorld->stepSimulation(get_delta_time(), 10);
 	//for (int j=dynamicsWorld->getNumCollisionObjects()-1; j>=0 ;j--)
 		//{
 			//btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];

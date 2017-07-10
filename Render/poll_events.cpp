@@ -4,6 +4,7 @@
 namespace {
 	// Options
 	GLboolean shadows = true;
+	GLboolean normalMapping = true;
 }
 
 
@@ -30,6 +31,12 @@ void react_on_keys()
 	{
 		shadows = !shadows;
 		keysPressed[GLFW_KEY_SPACE] = true;
+	}
+
+	if (keys[GLFW_KEY_N] && !keysPressed[GLFW_KEY_N])
+	{
+		normalMapping = !normalMapping;
+		keysPressed[GLFW_KEY_N] = true;
 	}
 }
 
@@ -78,4 +85,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 
 GLboolean& get_shadow_option() {
 	return shadows;
+}
+
+GLboolean& get_normal_map_option() {
+	return normalMapping;
 }

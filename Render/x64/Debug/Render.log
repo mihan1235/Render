@@ -1,2 +1,36 @@
-﻿  Render.vcxproj -> D:\Visual_Studio_2015_Projects\Projects\Render\x64\Debug\Render.exe
+﻿  texture_operations.cpp
+  resource_manager.cpp
+d:\visual_studio_2015_projects\projects\render\render\ext\bullet\include\linearmath\btidebugdraw.h(169): warning C4305: аргумент: усечение из "double" к "const btScalar"
+d:\visual_studio_2015_projects\projects\render\render\ext\bullet\include\linearmath\btidebugdraw.h(170): warning C4305: аргумент: усечение из "double" к "const btScalar"
+d:\visual_studio_2015_projects\projects\render\render\ext\bullet\include\linearmath\btidebugdraw.h(171): warning C4305: аргумент: усечение из "double" к "const btScalar"
+d:\visual_studio_2015_projects\projects\render\render\shader.h(62): warning C4101: infoLog: неиспользованная локальная переменная
+d:\visual_studio_2015_projects\projects\render\render\shader.h(61): warning C4101: success: неиспользованная локальная переменная
+  render.cpp
+d:\visual_studio_2015_projects\projects\render\render\render.cpp(93): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
+  poll_events.cpp
+d:\visual_studio_2015_projects\projects\render\render\poll_events.cpp(67): warning C4244: =: преобразование "double" в "GLfloat", возможна потеря данных
+d:\visual_studio_2015_projects\projects\render\render\poll_events.cpp(68): warning C4244: =: преобразование "double" в "GLfloat", возможна потеря данных
+d:\visual_studio_2015_projects\projects\render\render\poll_events.cpp(72): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
+d:\visual_studio_2015_projects\projects\render\render\poll_events.cpp(73): warning C4244: инициализация: преобразование "double" в "GLfloat", возможна потеря данных
+d:\visual_studio_2015_projects\projects\render\render\poll_events.cpp(75): warning C4244: =: преобразование "double" в "GLfloat", возможна потеря данных
+d:\visual_studio_2015_projects\projects\render\render\poll_events.cpp(76): warning C4244: =: преобразование "double" в "GLfloat", возможна потеря данных
+d:\visual_studio_2015_projects\projects\render\render\poll_events.cpp(83): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+  object.cpp
+d:\visual_studio_2015_projects\projects\render\render\shader.h(62): warning C4101: infoLog: неиспользованная локальная переменная
+d:\visual_studio_2015_projects\projects\render\render\shader.h(61): warning C4101: success: неиспользованная локальная переменная
+  model.cpp
+d:\visual_studio_2015_projects\projects\render\render\shader.h(62): warning C4101: infoLog: неиспользованная локальная переменная
+d:\visual_studio_2015_projects\projects\render\render\shader.h(61): warning C4101: success: неиспользованная локальная переменная
+  mesh.cpp
+d:\visual_studio_2015_projects\projects\render\render\shader.h(62): warning C4101: infoLog: неиспользованная локальная переменная
+d:\visual_studio_2015_projects\projects\render\render\shader.h(61): warning C4101: success: неиспользованная локальная переменная
+d:\visual_studio_2015_projects\projects\render\render\mesh.cpp(69): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
+  main.cpp
+d:\visual_studio_2015_projects\projects\render\render\shader.h(62): warning C4101: infoLog: неиспользованная локальная переменная
+d:\visual_studio_2015_projects\projects\render\render\shader.h(61): warning C4101: success: неиспользованная локальная переменная
+d:\visual_studio_2015_projects\projects\render\render\ext\bullet\include\linearmath\btidebugdraw.h(169): warning C4305: аргумент: усечение из "double" к "const btScalar"
+d:\visual_studio_2015_projects\projects\render\render\ext\bullet\include\linearmath\btidebugdraw.h(170): warning C4305: аргумент: усечение из "double" к "const btScalar"
+d:\visual_studio_2015_projects\projects\render\render\ext\bullet\include\linearmath\btidebugdraw.h(171): warning C4305: аргумент: усечение из "double" к "const btScalar"
+  Создание кода...
+  Render.vcxproj -> D:\Visual_Studio_2015_Projects\Projects\Render\x64\Debug\Render.exe
   Render.vcxproj -> D:\Visual_Studio_2015_Projects\Projects\Render\x64\Debug\Render.pdb (Partial PDB)

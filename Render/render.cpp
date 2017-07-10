@@ -65,7 +65,7 @@ void setup_opengl(GLFWwindow* window) {
 }
 
 glm::mat4 get_projection() {
-	return glm::perspective(camera.Zoom, (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+	return glm::perspective(camera.Zoom, (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
 }
 
 glm::mat4 get_view_matrix() {
