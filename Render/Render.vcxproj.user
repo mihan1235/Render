@@ -3,4 +3,9 @@
   <PropertyGroup>
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)\resources</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerCommand>$(TargetPath)</LocalDebuggerCommand>
+  </PropertyGroup>
 </Project>

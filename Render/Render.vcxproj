@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{0E2A4AED-DF5C-4A05-8B88-4DE605740D88}</ProjectGuid>
+    <ProjectGuid>{56D5D536-65F7-4E79-9728-0B7948D23102}</ProjectGuid>
     <RootNamespace>Render</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -74,27 +74,20 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\;$(ProjectDir)\ext\;$(ProjectDir)\ext\glew\include;$(ProjectDir)\ext\glfw\include;$(ProjectDir)\ext\freeimage\include;$(ProjectDir)\ext\glm;$(ProjectDir)\ext\bullet\include;$(ProjectDir)\ext\assimp\include;$(ProjectDir)\core;$(ProjectDir)\core\camera;$(ProjectDir)\core\core_errors;$(ProjectDir)\core\depth_buffer;$(ProjectDir)\core\keyboard_manager;$(ProjectDir)\core\mouse_manager;$(ProjectDir)\core\physics_manager;$(ProjectDir)\core\resource_manager;$(ProjectDir)\core\screen_buffer_object;$(ProjectDir)\core\camera\camera_movement;$(ProjectDir)\core\mouse_manager\cursor_position;$(ProjectDir)\core\mouse_manager\scroll_offset;$(ProjectDir)\core\physics_manager\physics_object;$(ProjectDir)\core\resource_manager\object;$(ProjectDir)\core\resource_manager\object\render;$(ProjectDir)\core\resource_manager\object\shader_program;$(ProjectDir)\error;$(ProjectDir)\objects\cube;$(ProjectDir)\objects\rectangle;$(ProjectDir)\objects\textured_rectangle;$(ProjectDir)\operations;$(ProjectDir)\renders\lamp_cube;$(ProjectDir)\renders\triangle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\;$(ProjectDir)\ext\;$(ProjectDir)\ext\glew\include;$(ProjectDir)\ext\glfw\include;$(ProjectDir)\ext\freeimage\include;$(ProjectDir)\ext\glm;$(ProjectDir)\ext\bullet\include;$(ProjectDir)\ext\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=2;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(ProjectDir)\ext\;$(ProjectDir)\ext\glew\lib\Release\x64\;$(ProjectDir)\ext\freeimage\lib\x64\;$(ProjectDir)\ext\glfw\lib;$(ProjectDir)\ext\bullet\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;FreeImage.lib;glfw3dll.lib;Bullet2FileLoader_Debug.lib;Bullet3Collision_Debug.lib;Bullet3Common_Debug.lib;Bullet3Dynamics_Debug.lib;Bullet3Geometry_Debug.lib;Bullet3OpenCL_clew_Debug.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletExampleBrowserLib_Debug.lib;BulletFileLoader_Debug.lib;BulletInverseDynamics_Debug.lib;BulletInverseDynamicsUtils_Debug.lib;BulletSoftBody_Debug.lib;BulletWorldImporter_Debug.lib;BulletXmlWorldImporter_Debug.lib;BussIK_Debug.lib;ConvexDecomposition_Debug.lib;GIMPACTUtils_Debug.lib;gtest_Debug.lib;gwen_Debug.lib;HACD_Debug.lib;LinearMath_Debug.lib;OpenGLWindow_Debug.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\ext\;$(ProjectDir)\ext\glew\lib\Release\x64\;$(ProjectDir)\ext\freeimage\lib\x64\;$(ProjectDir)\ext\glfw\lib;$(ProjectDir)\ext\bullet\lib;$(ProjectDir)\ext\assimp\libs</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;FreeImage.lib;glfw3dll.lib;Bullet2FileLoader_Debug.lib;Bullet3Collision_Debug.lib;Bullet3Common_Debug.lib;Bullet3Dynamics_Debug.lib;Bullet3Geometry_Debug.lib;Bullet3OpenCL_clew_Debug.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;BulletExampleBrowserLib_Debug.lib;BulletFileLoader_Debug.lib;BulletInverseDynamics_Debug.lib;BulletInverseDynamicsUtils_Debug.lib;BulletSoftBody_Debug.lib;BulletWorldImporter_Debug.lib;BulletXmlWorldImporter_Debug.lib;BussIK_Debug.lib;ConvexDecomposition_Debug.lib;GIMPACTUtils_Debug.lib;gtest_Debug.lib;gwen_Debug.lib;HACD_Debug.lib;LinearMath_Debug.lib;OpenGLWindow_Debug.lib;opengl32.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -124,56 +117,46 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="core\camera\camera.cpp" />
-    <ClCompile Include="core\core.cpp" />
-    <ClCompile Include="core\core_errors\core_error.cpp" />
-    <ClCompile Include="core\depth_buffer\depth_buffer.cpp" />
-    <ClCompile Include="core\keyboard_manager\keyboard_manager.cpp" />
-    <ClCompile Include="core\mouse_manager\mouse_manager.cpp" />
-    <ClCompile Include="core\physics_manager\physics_manager.cpp" />
-    <ClCompile Include="core\physics_manager\physics_object\physics_object.cpp" />
-    <ClCompile Include="core\resource_manager\object\object.cpp" />
-    <ClCompile Include="core\resource_manager\object\render\render.cpp" />
-    <ClCompile Include="core\resource_manager\object\shader_program\shader_program.cpp" />
-    <ClCompile Include="core\resource_manager\resource_manager.cpp" />
-    <ClCompile Include="core\screen_buffer_object\screen_buffer_object.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="objects\cube\cube.cpp" />
-    <ClCompile Include="objects\rectangle\rectangle.cpp" />
-    <ClCompile Include="objects\textured_rectangle\textured_rectangle.cpp" />
-    <ClCompile Include="operations\file_operations.cpp" />
-    <ClCompile Include="operations\light.cpp" />
-    <ClCompile Include="operations\textures_operations.cpp" />
-    <ClCompile Include="renders\lamp_cube\lamp_cube.cpp" />
-    <ClCompile Include="renders\triangle\triangle.cpp" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="model.h" />
+    <ClInclude Include="objects.hpp" />
+    <ClInclude Include="poll_events.hpp" />
+    <ClInclude Include="render.hpp" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="shader.h" />
+    <ClInclude Include="texture_operations.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\camera\camera.hpp" />
-    <ClInclude Include="core\camera\camera_movement\camera_movement.hpp" />
-    <ClInclude Include="core\core.hpp" />
-    <ClInclude Include="core\core_errors\core_error.hpp" />
-    <ClInclude Include="core\depth_buffer\depth_buffer.hpp" />
-    <ClInclude Include="core\keyboard_manager\keyboard_manager.hpp" />
-    <ClInclude Include="core\mouse_manager\cursor_position\cursor_position.hpp" />
-    <ClInclude Include="core\mouse_manager\mouse_manager.hpp" />
-    <ClInclude Include="core\mouse_manager\scroll_offset\scroll_offset.hpp" />
-    <ClInclude Include="core\physics_manager\physics_manager.hpp" />
-    <ClInclude Include="core\physics_manager\physics_object\physics_object.hpp" />
-    <ClInclude Include="core\resource_manager\object\object.hpp" />
-    <ClInclude Include="core\resource_manager\object\render\render.hpp" />
-    <ClInclude Include="core\resource_manager\object\shader_program\shader_program.hpp" />
-    <ClInclude Include="core\resource_manager\object\shader_program\shader_type.hpp" />
-    <ClInclude Include="core\resource_manager\resource_manager.hpp" />
-    <ClInclude Include="core\screen_buffer_object\screen_buffer_object.hpp" />
-    <ClInclude Include="error\error.hpp" />
-    <ClInclude Include="objects\cube\cube.hpp" />
-    <ClInclude Include="objects\rectangle\rectangle.hpp" />
-    <ClInclude Include="objects\textured_rectangle\textured_rectangle.hpp" />
-    <ClInclude Include="operations\file_operations.hpp" />
-    <ClInclude Include="operations\light.hpp" />
-    <ClInclude Include="operations\texture_operations.hpp" />
-    <ClInclude Include="renders\lamp_cube\lamp_cube.hpp" />
-    <ClInclude Include="renders\triangle\triangle.hpp" />
+    <ResourceCompile Include="Render.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\data\grnd_concrete_1.dds" />
+    <Image Include="textures\data\grnd_grass_mp.dds" />
+    <Image Include="textures\data\ston_asfalt_a.dds" />
+    <Image Include="textures\data\ston_asfalt_hr_iov.dds" />
+    <Image Include="textures\data\ston_kirpichi_b.dds" />
+    <Image Include="textures\data\wall_ceiling_01.dds" />
+    <Image Include="textures\data\wall_house_red_02.dds" />
+    <Image Include="textures\data\wall_orange_01.dds" />
+    <Image Include="textures\data\wall_yellow_01.dds" />
+    <Image Include="textures\data\wood_plank6.dds" />
+    <Image Include="textures\data\wood_plank7.dds" />
+    <Image Include="textures\data\wood_razlom_1.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="object.cpp" />
+    <ClCompile Include="poll_events.cpp" />
+    <ClCompile Include="render.cpp" />
+    <ClCompile Include="texture_operations.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\point_shadows.frag" />
+    <None Include="resources\point_shadows.vert" />
+    <None Include="resources\point_shadows_depth.frag" />
+    <None Include="resources\point_shadows_depth.geom" />
+    <None Include="resources\point_shadows_depth.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
