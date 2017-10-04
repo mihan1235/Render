@@ -19,8 +19,11 @@
 #include <mesh.h>
 #include <shader.h>
 
+#include "btBulletDynamicsCommon.h"
+
 
 GLint TextureFromFile(const char* path,std::string directory, bool gamma = false);
+
 
 class Model
 {
@@ -37,6 +40,7 @@ public:
 	Model(std::string const & path, bool gamma = false);
 	// Draws the model, and thus all its meshes
 	void Draw(Shader shader);
+	std::vector<btVector3>& get_physics_vertex_array_ref();
 private:
 	/*  Functions   */
 	// Loads a model with supported ASSIMP extensions from file 
@@ -50,4 +54,5 @@ private:
 	// Checks all material textures of a given type and loads the textures if they're not loaded yet.
 	// The required info is returned as a Texture struct.
 	std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type,std::string typeName);
+	std::vector<btVector3> physics_vertex_array;
 };

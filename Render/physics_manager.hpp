@@ -2,7 +2,6 @@
 #include "btBulletDynamicsCommon.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <physics_object.hpp>
 #include <object.hpp>
 
 
@@ -19,7 +18,7 @@ class PhysicsManager{
 public:
 	PhysicsManager();
 	void start_simulation_step();
-	void add_rigid_body(PhysicsObject* physics_obj);
+	void add_rigid_body(Object* physics_obj);
 	//////////////////////////////////////////////
 	~PhysicsManager();
 private:
@@ -31,6 +30,6 @@ protected:
 
 
 void start_simulation_step();
-void add_rigid_body(PhysicsObject* physics_obj);
+void add_rigid_body(Object* physics_obj);
 
 

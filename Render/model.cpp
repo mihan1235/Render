@@ -12,8 +12,13 @@ Model::Model(string const & path, bool gamma)
 // Draws the model, and thus all its meshes
 void Model::Draw(Shader shader)
 {
-	for (GLuint i = 0; i < this->meshes.size(); i++)
+	for (GLuint i = 0; i < this->meshes.size(); i++) {
 		this->meshes[i].Draw(shader);
+	}
+}
+
+std::vector<btVector3>& Model::get_physics_vertex_array_ref() {
+	return physics_vertex_array;
 }
 
 /*  Functions   */
@@ -71,6 +76,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		vector.y = mesh->mVertices[i].y;
 		vector.z = mesh->mVertices[i].z;
 		vertex.Position = vector;
+		physics_vertex_array.push_back(btVector3(vector.x, vector.y, vector.z));
 		// Normals
 		vector.x = mesh->mNormals[i].x;
 		vector.y = mesh->mNormals[i].y;

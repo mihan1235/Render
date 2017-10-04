@@ -2,10 +2,10 @@
 #include <camera.h>
 
 namespace {
-	int SCR_WIDTH = 800;
-	int SCR_HEIGHT = 600;
+	int SCR_WIDTH = 1600;
+	int SCR_HEIGHT = 900;
 	// Camera
-	Camera camera(glm::vec3(0.0f, 3.0f, 3.0f));
+	Camera camera(glm::vec3(0.0f, 3.0f, 6.0f));
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
 	bool glew_init = false;
@@ -31,7 +31,8 @@ void init_glfw() {
 GLFWwindow*  create_window() {
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Render", monitor, NULL);
+	/*GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Render", monitor, NULL);*/
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Render", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	return window;
 }

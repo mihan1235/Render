@@ -3,13 +3,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <object.hpp>
+
+#include <vector>
 
 
-class PhysicsObject: public Object{
+class IPhysicsObject{
 public:
-	PhysicsObject(glm::vec3 position, btCollisionShape* shape=nullptr,float mass=0.0f);
-	~PhysicsObject();
+	IPhysicsObject(glm::vec3 position,float mass=0.0f);
+	~IPhysicsObject();
 	btCollisionShape* get_shape();
 	btRigidBody* get_rigid_body();
 	float get_mass();
@@ -18,11 +19,11 @@ public:
 	void set_rigid_body(btRigidBody* body);
 	glm::mat4 get_model();
 private:
-	PhysicsObject(const PhysicsObject&);
-	PhysicsObject& operator=(const PhysicsObject&) {};
+	IPhysicsObject(const IPhysicsObject&);
+	IPhysicsObject& operator=(const IPhysicsObject&) {};
 protected:
-	btCollisionShape* shape;
-	btRigidBody* body;
+	btCollisionShape* shape=nullptr;
+	btRigidBody* body=nullptr;
 	float mass;
 	glm::vec3 default_position;
 	glm::vec3 position();

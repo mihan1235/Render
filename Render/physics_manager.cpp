@@ -27,7 +27,7 @@ PhysicsManager::PhysicsManager(){
 
 void PhysicsManager::start_simulation_step(){
 	//dynamicsWorld->stepSimulation(get_delta_time()/3,10);
-	dynamicsWorld->stepSimulation(get_delta_time(), 10);
+	dynamicsWorld->stepSimulation(get_delta_time()/13, 10);
 	//for (int j=dynamicsWorld->getNumCollisionObjects()-1; j>=0 ;j--)
 		//{
 			//btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
@@ -45,7 +45,7 @@ void PhysicsManager::start_simulation_step(){
 		//}
 }
 
-void PhysicsManager::add_rigid_body(PhysicsObject* physics_obj){
+void PhysicsManager::add_rigid_body(Object* physics_obj){
 	btCollisionShape* groundShape = physics_obj->get_shape();
 	collisionShapes.push_back(groundShape);
 	btTransform groundTransform;
@@ -111,6 +111,6 @@ void start_simulation_step() {
 	physics_manager.start_simulation_step();
 }
 
-void add_rigid_body(PhysicsObject* physics_obj) {
+void add_rigid_body(Object* physics_obj) {
 	physics_manager.add_rigid_body(physics_obj);
 }

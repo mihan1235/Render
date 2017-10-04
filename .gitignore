@@ -1,0 +1,7 @@
+Render/x64/Debug/*.log
+Render/x64/Debug/*.obj
+Render/x64/Debug/*.tlog
+Render/x64/Debug/*.idb
+Render/x64/Debug/*.pdb
+x64/Debug/*.ilk
+x64/Debug/*.pdb

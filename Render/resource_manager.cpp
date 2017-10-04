@@ -21,15 +21,15 @@ void ResourceManager::draw_objects(Shader& shader_program) {
 	}
 }
 
-//void ResourceManager::add_objects_to_physics_manager(PhysicsManager& physics_manager) {
-//	////////////////physics manager/////////////////////////
-//	for (std::vector<Object*>::iterator iter = object_arr.begin(); iter != object_arr.end(); ++iter) {
-//		// get the object from the iterator
-//		Object* p_obj = *iter;
-//		physics_manager.add_rigid_body(p_obj);
-//	}
-//	////////////////////////////////////////////////////////
-//}
+void ResourceManager::add_objects_to_physics_manager() {
+	////////////////physics manager/////////////////////////
+	for (std::vector<Object*>::iterator iter = object_arr.begin(); iter != object_arr.end(); ++iter) {
+		// get the object from the iterator
+		Object* p_obj = *iter;
+		add_rigid_body(p_obj);
+	}
+	////////////////////////////////////////////////////////
+}
 
 void ResourceManager::init_objects() {
 	init_models();
@@ -38,44 +38,53 @@ void ResourceManager::init_objects() {
 	tmp->set_model(model_map["quard"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	tmp = new Object(vec3(-4.0f, 3.5f, -8.0));
+	tmp = new Object(vec3(-4.0f, 13.5f, -8.0));
+	tmp->set_mass(5.0f);
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	tmp = new Object(vec3(4.0f, 3.0f, 1.0));
+	tmp = new Object(vec3(4.0f, 13.0f, 1.0));
+	tmp->set_mass(5.0f);
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	tmp = new Object(vec3(-3.0f, 1.0f, -8.0));
+	tmp = new Object(vec3(-3.0f, 11.0f, -8.0));
+	tmp->set_mass(5.0f);
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	tmp = new Object(vec3(2.5f, 5.2f, 1.5));
+	tmp = new Object(vec3(2.5f, 15.2f, 1.5));
+	tmp->set_mass(5.0f);
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	tmp = new Object(vec3(6.5f, 5.0f, -3.0));
+	tmp = new Object(vec3(-6.0f, 15.0f, 0.0));
+	tmp->set_mass(5.0f);
 	tmp->set_model(model_map["cube"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////
 	tmp = new Object(vec3(-6.0f, 0.1f, 0.0));
+	tmp->set_mass(500.0f);
 	tmp->set_model(model_map["zil_131"]);
 	object_arr.push_back(tmp);
-	///////////////////////////////////////////////////
+	/////////////////////////////////////////////////////
 	tmp = new Object(vec3(-2.0f, 0.1f, 0.0f));
+	tmp->set_mass(500.0f);
 	tmp->set_model(model_map["trash_benzovoz_gaz_lod"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
-	tmp = new Object(vec3(-2.0f, 0.2f, 8.0f));
+	//tmp = new Object(vec3(-2.0f, 0.2f, 8.0f));
+	tmp = new Object(vec3(-2.0f, 10.2f, -9.0f));
+	tmp->set_mass(200.0f);
 	tmp->set_model(model_map["veh_moskvitch_u_01"]);
 	object_arr.push_back(tmp);
 
 }
 
 void ResourceManager::init_models(){
-	model_map["zil_131"]= new Model("zil_131/zil_131.obj");
+    model_map["zil_131"]= new Model("zil_131/zil_131.obj");
 	model_map["cube"] = new Model("cube/cube.obj");
 	model_map["quard"]= new Model("quad/quard.blend");
 	model_map["trash_benzovoz_gaz_lod"]=new  Model("trash_benzovoz_gaz_lod/trash_benzovoz_gaz_lod.obj");
@@ -98,12 +107,12 @@ ResourceManager::~ResourceManager(){
 		}
 	}
 
-	if (shader_map.empty() == false) {
+	/*if (shader_map.empty() == false) {
 		std::map<std::string, Shader*>::iterator it;
 		for (it = shader_map.begin(); it != shader_map.end(); ++it) {
 			delete it->second;
 		}
-	}
+	}*/
 
 	if (model_map.empty() == false) {
 		std::map<std::string, Model*>::iterator it;
@@ -139,8 +148,10 @@ ResourceManager::~ResourceManager(){
 
 void init_objects() {
 	res_manager.init_objects();
+	res_manager.add_objects_to_physics_manager();
 }
 
 void draw_objects(Shader& shader) {
+	start_simulation_step();
 	res_manager.draw_objects(shader);
 }
