@@ -66,8 +66,9 @@ void ResourceManager::init_objects() {
 	///////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////
-	tmp = new Object(vec3(-6.0f, 0.10f, 0.0));
+	tmp = new Object(vec3(-6.0f, 3.0f, 0.0));
 	tmp->set_mass(500.0f);
+	tmp->gimpact = true;
 	tmp->set_model(model_map["zil_131"]);
 	object_arr.push_back(tmp);
 	/////////////////////////////////////////////////////

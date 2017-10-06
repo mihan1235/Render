@@ -31,8 +31,8 @@ void init_glfw() {
 GLFWwindow*  create_window() {
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	/*GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Render", monitor, NULL);*/
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Render", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Render", monitor, NULL);
+	/*GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Render", NULL, NULL);*/
 	glfwMakeContextCurrent(window);
 	return window;
 }

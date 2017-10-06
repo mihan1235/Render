@@ -30,7 +30,7 @@ PhysicsManager::PhysicsManager(){
 
 void PhysicsManager::start_simulation_step(){
 	//dynamicsWorld->stepSimulation(get_delta_time()/3,10);
-	dynamicsWorld->stepSimulation(get_delta_time()/13, 10);
+	dynamicsWorld->stepSimulation(get_delta_time()/6, 10);
 	//for (int j=dynamicsWorld->getNumCollisionObjects()-1; j>=0 ;j--)
 		//{
 			//btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];

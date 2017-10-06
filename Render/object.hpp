@@ -9,6 +9,8 @@ class Object :public IPhysicsObject {
 	
 public:
 	bool level = false;
+	bool gimpact = false;
+	bool physics = true;
 	Object(glm::vec3 position);
 	virtual void draw(Shader* shader);
 	void set_model(Model* model);

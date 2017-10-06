@@ -5,3 +5,10 @@ Render/x64/Debug/*.idb
 Render/x64/Debug/*.pdb
 x64/Debug/*.ilk
 x64/Debug/*.pdb
+Render/x64/Release/*.log
+Render/x64/Release/*.tlog
+x64/Release/*.iobj
+x64/Release/*.ipdb
+x64/Release/*.pdb
+Render/x64/Release/*.obj
+Render/x64/Release/*.pdb
