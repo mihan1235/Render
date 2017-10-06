@@ -1,4 +1,5 @@
 #include <model.h>
+
 using namespace std;
 
 /*  Functions   */
@@ -7,6 +8,22 @@ Model::Model(string const & path, bool gamma)
 {
 	gammaCorrection = gamma;
 	this->loadModel(path);
+}
+
+void Model::delete_shapes() {
+	if (ConvexTriangleMeshShape != nullptr) {
+		delete ConvexTriangleMeshShape;
+	}
+	if (ConvexHullShape != nullptr) {
+		delete ConvexHullShape;
+	}
+	if (BvhTriangleMeshShape != nullptr) {
+		delete BvhTriangleMeshShape;
+	}
+}
+
+Model::~Model() {
+	delete_shapes();
 }
 
 // Draws the model, and thus all its meshes
@@ -19,6 +36,173 @@ void Model::Draw(Shader shader)
 
 std::vector<btVector3>& Model::get_physics_vertex_array_ref() {
 	return physics_vertex_array;
+}
+
+std::vector<int>& Model::get_physics_indices_array_ref() {
+	return physics_indices_array;
+}
+
+btCollisionShape* Model::get_btConvexHullShape() {
+	vector<btVector3>& points = get_physics_vertex_array_ref();
+	if (ConvexHullShape != nullptr) {
+		printf("Returning btConvexHullShape: ");
+		printf("Points:[%i]\n", points.size());
+		return ConvexHullShape;
+	}
+	printf("Making btConvexHullShape: ");
+	printf("Points:[%i]\n", points.size());
+	btConvexHullShape* pShape = new btConvexHullShape();
+	for (int i = 0; i < points.size(); i++) {
+		pShape->addPoint(points[i]);
+	}
+	// initialize the object as a polyhedron
+	//pShape->initializePolyhedralFeatures();
+	ConvexHullShape = pShape;
+	/*shape = new btBoxShape(btVector3(1, 1, 1));*/
+	return ConvexHullShape;
+}
+
+btCollisionShape* Model::get_btConvexTriangleMeshShape() {
+	vector<btVector3>& points = get_physics_vertex_array_ref();
+	vector<int>& indices = get_physics_indices_array_ref();
+	if (ConvexTriangleMeshShape != nullptr) {
+		printf("Returning btConvexTriangleMeshShape: ");
+		printf("Points:[%i]\n", points.size());
+		printf("                                   ");
+		printf("Indices:[%i]\n", indices.size());
+		return ConvexTriangleMeshShape;
+	}
+	//btTriangleIndexVertexArray* meshInterface = new btTriangleIndexVertexArray();
+	//btIndexedMesh part;
+	printf("Making btConvexTriangleMeshShape: ");
+	printf("Points:[%i]\n", points.size());
+	printf("                                   ");
+	printf("Indices:[%i]\n", indices.size());
+	/*{
+	vector<btVector3>& points_vector = model->get_physics_vertex_array_ref();
+	printf("points: [%i]\n", points_vector.size());
+
+	points.reserve(points_vector.size() * 3);
+	for (int i = 0; i < points_vector.size(); i++) {
+	points.push_back(points_vector[i].getX());
+	points.push_back(points_vector[i].getY());
+	points.push_back(points_vector[i].getZ());
+	}
+	}*/
+
+	btTriangleIndexVertexArray* meshInterface = new btTriangleIndexVertexArray(
+		indices.size() / 3,
+		&indices[0],
+		3 * sizeof(int),
+		points.size(),
+		(btScalar*)&points[0].x(),
+		sizeof(btVector3)
+	);
+
+	//btTriangleIndexVertexArray* meshInterface = new btTriangleIndexVertexArray();
+	//btIndexedMesh mesh;
+
+	//const int stride = 3; // For vertex indices and vertices, see BVG.cpp for explanation
+	//mesh.m_indexType = PHY_INTEGER;
+	//mesh.m_numTriangles = indices.size();
+	//mesh.m_triangleIndexStride = stride * sizeof(int);
+	//mesh.m_triangleIndexBase = new unsigned char[sizeof(int) * indices.size()];// Allocate memory for the mesh
+
+	//mesh.m_vertexType = PHY_FLOAT;
+	//mesh.m_numVertices = points.size() / stride;
+	//mesh.m_vertexStride = stride * sizeof(float);
+	//mesh.m_vertexBase = new unsigned char[sizeof(btScalar) * points.size()];// Allocate memory for the mesh
+
+	// // copy indices into mesh
+	//int* indicesP = static_cast<int*>((void*)(mesh.m_triangleIndexBase));
+	//for (int i = 0; i < indices.size(); ++i) {
+	//	indicesP[i] = indices.at(i);
+	//}
+	//// copy vertices into mesh
+	//btScalar* vertexData = static_cast<btScalar*>((void*)(mesh.m_vertexBase));
+	//for (int i = 0; i < points.size(); ++i) {
+	//	vertexData[i] = points.at(i);
+	//}
+	//meshInterface->addIndexedMesh(mesh);
+	bool	useQuantizedAabbCompression = true;
+	btConvexTriangleMeshShape* trimeshShape = new btConvexTriangleMeshShape(meshInterface, useQuantizedAabbCompression);
+	ConvexTriangleMeshShape = trimeshShape;
+
+	/*btGImpactMeshShape
+	#include <BulletCollision/Gimpact/btGImpactShape.h>*/
+	return ConvexTriangleMeshShape;
+}
+
+btCollisionShape* Model::get_btBvhTriangleMeshShape() {
+	vector<int>& indices = get_physics_indices_array_ref();
+	vector<btVector3>& points = get_physics_vertex_array_ref();
+	if (BvhTriangleMeshShape != nullptr) {
+		printf("Returning btBvhTriangleMeshShape: ");
+		printf("Points:[%i]\n", points.size());
+		printf("                                   ");
+		printf("Indices:[%i]\n", indices.size());
+		return BvhTriangleMeshShape;
+	}
+	//btTriangleIndexVertexArray* meshInterface = new btTriangleIndexVertexArray();
+	//btIndexedMesh part;
+	
+	printf("Making btBvhTriangleMeshShape: ");
+	printf("Points:[%i]\n", points.size());
+	printf("                                   ");
+	printf("Indices:[%i]\n", indices.size());
+	/*{
+	vector<btVector3>& points_vector = model->get_physics_vertex_array_ref();
+	printf("points: [%i]\n", points_vector.size());
+
+	points.reserve(points_vector.size() * 3);
+	for (int i = 0; i < points_vector.size(); i++) {
+	points.push_back(points_vector[i].getX());
+	points.push_back(points_vector[i].getY());
+	points.push_back(points_vector[i].getZ());
+	}
+	}*/
+
+	btTriangleIndexVertexArray* meshInterface = new btTriangleIndexVertexArray(
+		indices.size() / 3,
+		&indices[0],
+		3 * sizeof(int),
+		points.size(),
+		(btScalar*)&points[0].x(),
+		sizeof(btVector3)
+	);
+
+	//btTriangleIndexVertexArray* meshInterface = new btTriangleIndexVertexArray();
+	//btIndexedMesh mesh;
+
+	//const int stride = 3; // For vertex indices and vertices, see BVG.cpp for explanation
+	//mesh.m_indexType = PHY_INTEGER;
+	//mesh.m_numTriangles = indices.size();
+	//mesh.m_triangleIndexStride = stride * sizeof(int);
+	//mesh.m_triangleIndexBase = new unsigned char[sizeof(int) * indices.size()];// Allocate memory for the mesh
+
+	//mesh.m_vertexType = PHY_FLOAT;
+	//mesh.m_numVertices = points.size() / stride;
+	//mesh.m_vertexStride = stride * sizeof(float);
+	//mesh.m_vertexBase = new unsigned char[sizeof(btScalar) * points.size()];// Allocate memory for the mesh
+
+	// // copy indices into mesh
+	//int* indicesP = static_cast<int*>((void*)(mesh.m_triangleIndexBase));
+	//for (int i = 0; i < indices.size(); ++i) {
+	//	indicesP[i] = indices.at(i);
+	//}
+	//// copy vertices into mesh
+	//btScalar* vertexData = static_cast<btScalar*>((void*)(mesh.m_vertexBase));
+	//for (int i = 0; i < points.size(); ++i) {
+	//	vertexData[i] = points.at(i);
+	//}
+	//meshInterface->addIndexedMesh(mesh);
+	bool	useQuantizedAabbCompression = true;
+	btBvhTriangleMeshShape* trimeshShape = new btBvhTriangleMeshShape(meshInterface, useQuantizedAabbCompression);
+	BvhTriangleMeshShape = trimeshShape;
+
+	/*btGImpactMeshShape
+	#include <BulletCollision/Gimpact/btGImpactShape.h>*/
+	return BvhTriangleMeshShape;
 }
 
 /*  Functions   */
@@ -112,8 +296,10 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	{
 		aiFace face = mesh->mFaces[i];
 		// Retrieve all indices of the face and store them in the indices vector
-		for (GLuint j = 0; j < face.mNumIndices; j++)
+		for (GLuint j = 0; j < face.mNumIndices; j++) {
 			indices.push_back(face.mIndices[j]);
+			physics_indices_array.push_back(face.mIndices[j]);
+		}
 	}
 	// Process materials
 

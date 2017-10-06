@@ -1,6 +1,8 @@
 #include <physics_manager.hpp>
 #include <cstdio>
 #include <render.hpp>
+#include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
+
 
 namespace {
 	PhysicsManager physics_manager;
@@ -14,6 +16,7 @@ PhysicsManager::PhysicsManager(){
 	///use the default collision dispatcher. For parallel processing
 	///you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
 	dispatcher =new btCollisionDispatcher(collisionConfiguration);
+	btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
 	///btDbvtBroadphase is a good general purpose broadphase. You can 
 	///also try out btAxis3Sweep.
 	overlappingPairCache = new btDbvtBroadphase();
@@ -93,7 +96,7 @@ PhysicsManager::~PhysicsManager(){
 	{
 		btCollisionShape* shape = collisionShapes[j];
 		collisionShapes[j] = 0;
-		delete shape;
+		//delete shape;
 	}
 	//delete dynamics world
 	delete dynamicsWorld;

@@ -5,7 +5,7 @@ namespace {
 	int SCR_WIDTH = 1600;
 	int SCR_HEIGHT = 900;
 	// Camera
-	Camera camera(glm::vec3(0.0f, 3.0f, 6.0f));
+	Camera camera(glm::vec3(0.0f, 13.0f, 14.0f));
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
 	bool glew_init = false;

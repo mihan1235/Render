@@ -35,6 +35,7 @@ void ResourceManager::init_objects() {
 	init_models();
 	///////////////////////////////////////////////////
 	Object* tmp = new Object(vec3(0.0f, 0.0f, 0.0f));
+	tmp->level = true;
 	tmp->set_model(model_map["quard"]);
 	object_arr.push_back(tmp);
 	///////////////////////////////////////////////////
@@ -65,12 +66,12 @@ void ResourceManager::init_objects() {
 	///////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////
-	tmp = new Object(vec3(-6.0f, 0.1f, 0.0));
+	tmp = new Object(vec3(-6.0f, 0.10f, 0.0));
 	tmp->set_mass(500.0f);
 	tmp->set_model(model_map["zil_131"]);
 	object_arr.push_back(tmp);
 	/////////////////////////////////////////////////////
-	tmp = new Object(vec3(-2.0f, 0.1f, 0.0f));
+	tmp = new Object(vec3(-2.0f, 1.0f, 4.0f));
 	tmp->set_mass(500.0f);
 	tmp->set_model(model_map["trash_benzovoz_gaz_lod"]);
 	object_arr.push_back(tmp);
@@ -80,6 +81,48 @@ void ResourceManager::init_objects() {
 	tmp->set_mass(200.0f);
 	tmp->set_model(model_map["veh_moskvitch_u_01"]);
 	object_arr.push_back(tmp);
+	///////////////////////////////////////////////////
+	tmp = new Object(vec3(6.0f, 15.0f, 0.0));
+	tmp->set_mass(5.0f);
+	tmp->set_model(model_map["cube"]);
+	object_arr.push_back(tmp);
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	tmp = new Object(vec3(4.0f, 15.0f, 0.0));
+	tmp->set_mass(5.0f);
+	tmp->set_model(model_map["cube"]);
+	object_arr.push_back(tmp);
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	tmp = new Object(vec3(7.0f, 15.0f, 1.0));
+	tmp->set_mass(5.0f);
+	tmp->set_model(model_map["cube"]);
+	object_arr.push_back(tmp);
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	tmp = new Object(vec3(7.0f, 13.0f, 4.0));
+	tmp->set_mass(5.0f);
+	tmp->set_model(model_map["cube"]);
+	object_arr.push_back(tmp);
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	tmp = new Object(vec3(8.0f, 13.0f, 5.0));
+	tmp->set_mass(5.0f);
+	tmp->set_model(model_map["cube"]);
+	object_arr.push_back(tmp);
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	tmp = new Object(vec3(9.0f, 13.0f, 3.0));
+	tmp->set_mass(5.0f);
+	tmp->set_model(model_map["cube"]);
+	object_arr.push_back(tmp);
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	tmp = new Object(vec3(10.0f, 13.0f, 4.0));
+	tmp->set_mass(5.0f);
+	tmp->set_model(model_map["cube"]);
+	object_arr.push_back(tmp);
+	///////////////////////////////////////////////////
 
 }
 

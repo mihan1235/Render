@@ -21,6 +21,8 @@
 
 #include "btBulletDynamicsCommon.h"
 
+//#include <std::vector.hpp>
+
 
 GLint TextureFromFile(const char* path,std::string directory, bool gamma = false);
 
@@ -38,9 +40,15 @@ public:
 	/*  Functions   */
 	// Constructor, expects a filepath to a 3D model.
 	Model(std::string const & path, bool gamma = false);
+	~Model();
 	// Draws the model, and thus all its meshes
 	void Draw(Shader shader);
 	std::vector<btVector3>& get_physics_vertex_array_ref();
+	std::vector<int>& get_physics_indices_array_ref();
+	btCollisionShape* get_btConvexHullShape();
+	btCollisionShape* get_btConvexTriangleMeshShape();
+	btCollisionShape* get_btBvhTriangleMeshShape();
+
 private:
 	/*  Functions   */
 	// Loads a model with supported ASSIMP extensions from file 
@@ -55,4 +63,9 @@ private:
 	// The required info is returned as a Texture struct.
 	std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type,std::string typeName);
 	std::vector<btVector3> physics_vertex_array;
+	std::vector<int> physics_indices_array;
+	btConvexTriangleMeshShape* ConvexTriangleMeshShape = nullptr;
+	btConvexHullShape* ConvexHullShape = nullptr;
+	btBvhTriangleMeshShape* BvhTriangleMeshShape = nullptr;
+	void delete_shapes();
 };

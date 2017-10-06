@@ -28,5 +28,7 @@ protected:
 	glm::vec3 default_position;
 	glm::vec3 position();
 	glm::quat orientation();
+	/*virtual void make_btConvexHullShape() = 0;
+	virtual void make_btConvexTriangleMeshShape() = 0;*/
 };
 
