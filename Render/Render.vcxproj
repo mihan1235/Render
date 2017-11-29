@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{56D5D536-65F7-4E79-9728-0B7948D23102}</ProjectGuid>
     <RootNamespace>Render</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -40,13 +40,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -122,7 +122,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BtDebugDrawer.hpp" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="cube.hpp" />
+    <ClInclude Include="level.hpp" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="object.hpp" />
@@ -132,9 +135,13 @@
     <ClInclude Include="render.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource_manager.hpp" />
+    <ClInclude Include="rock.hpp" />
     <ClInclude Include="screen_buffer_object.hpp" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="texture_operations.hpp" />
+    <ClInclude Include="trash_benzovoz_gaz_lod.hpp" />
+    <ClInclude Include="veh_moskvitch_u_01.hpp" />
+    <ClInclude Include="zil_131.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Render.rc" />
@@ -154,7 +161,10 @@
     <Image Include="textures\data\wood_razlom_1.dds" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BtDebugDrawer.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="cube.cpp" />
+    <ClCompile Include="level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="model.cpp" />
@@ -164,9 +174,13 @@
     <ClCompile Include="poll_events.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="resource_manager.cpp" />
+    <ClCompile Include="rock.cpp" />
     <ClCompile Include="screen_buffer_object.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="texture_operations.cpp" />
+    <ClCompile Include="trash_benzovoz_gaz_lod.cpp" />
+    <ClCompile Include="veh_moskvitch_u_01.cpp" />
+    <ClCompile Include="zil_131.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\point_shadows.frag" />

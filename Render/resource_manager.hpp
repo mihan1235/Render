@@ -23,7 +23,7 @@ public:
 	/*Shader& get_shader_ref(const char* name);*/
 	Model& get_model_ref(const char* name);
 private:
-	void init_models();
+	//void init_models();
 	ResourceManager(const ResourceManager&);
 	ResourceManager& operator=(const ResourceManager&) {};
 protected:

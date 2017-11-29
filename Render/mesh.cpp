@@ -21,10 +21,10 @@ int i2 = 0;
 void Mesh::Draw(Shader shader)
 {
 	// Bind appropriate textures
-	GLuint diffuseNr = 1;
-	GLuint specularNr = 1;
-	GLuint normalNr = 1;
-	GLuint heightNr = 1;
+	GLuint diffuseNr ;
+	GLuint specularNr ;
+	GLuint normalNr ;
+	GLuint heightNr;
 
 	for (GLuint i = 0; i < this->textures.size(); i++)
 	{

@@ -9,9 +9,9 @@
 
 class IPhysicsObject{
 public:
-	IPhysicsObject(glm::vec3 position,float mass=0.0f);
+	IPhysicsObject(glm::vec3 position,float mass);
 	~IPhysicsObject();
-	btCollisionShape* get_shape();
+	virtual btCollisionShape* get_shape()=0;
 	btRigidBody* get_rigid_body();
 	float get_mass();
 	void set_mass(float mass);
@@ -22,13 +22,17 @@ private:
 	IPhysicsObject(const IPhysicsObject&);
 	IPhysicsObject& operator=(const IPhysicsObject&) {};
 protected:
-	btCollisionShape* shape=nullptr;
+	//static btCollisionShape* shape;
 	btRigidBody* body=nullptr;
 	float mass;
 	glm::vec3 default_position;
 	glm::vec3 position();
 	glm::quat orientation();
-	/*virtual void make_btConvexHullShape() = 0;
-	virtual void make_btConvexTriangleMeshShape() = 0;*/
+	virtual void make_btCollisionShape() = 0;
 };
+
+btCollisionShape* get_btConvexHullShape(std::vector<btVector3>& points);
+btCollisionShape* get_btConvexTriangleMeshShape(std::vector<btVector3>& points, std::vector<int>& indices);
+btCollisionShape* get_btBvhTriangleMeshShape(std::vector<btVector3>& points, std::vector<int>& indices);
+btCollisionShape* get_btGImpactMeshShape(std::vector<btVector3>& points, std::vector<int>& indices);
 

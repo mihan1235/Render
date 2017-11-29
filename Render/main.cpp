@@ -51,10 +51,11 @@ int main()
 	GLuint depthCubemap;
 	glGenTextures(1, &depthCubemap);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
-	for (GLuint i = 0; i < 6; ++i)
+	for (GLuint i = 0; i < 6; ++i) {
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);//GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
@@ -63,8 +64,10 @@ int main()
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubemap, 0);
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
 		std::cout << "Framebuffer not complete!" << std::endl;
+	}
+		
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -74,7 +77,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		set_frame_time();
-
+		start_simulation_step();
 		// Check and call events
 		glfwPollEvents();
 		react_on_keys();
@@ -99,10 +102,11 @@ int main()
 		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		simpleDepthShader.Use();
-		for (GLuint i = 0; i < 6; ++i)
-			glUniformMatrix4fv(glGetUniformLocation(simpleDepthShader.Program, ("shadowTransforms[" + std::to_string(i) + "]").c_str()), 1, GL_FALSE, glm::value_ptr(shadowTransforms[i]));
-		glUniform1f(glGetUniformLocation(simpleDepthShader.Program, "far_plane"), far);
-		glUniform3fv(glGetUniformLocation(simpleDepthShader.Program, "lightPos"), 1, &lightPos[0]);
+		for (GLuint i = 0; i < 6; ++i) {
+			simpleDepthShader.setMat4(("shadowTransforms[" + std::to_string(i) + "]").c_str(), shadowTransforms[i]);
+		}
+		simpleDepthShader.setFloat("far_plane", far);
+		simpleDepthShader.setVec3("lightPos", lightPos);
 		draw_objects(simpleDepthShader);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -113,18 +117,16 @@ int main()
 		shader.Use();
 		glm::mat4 projection = get_projection();
 		glm::mat4 view = get_view_matrix();
-		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+		shader.setMat4("projection",projection);
+		shader.setMat4("view",view);
 		// Set light uniforms
-		glUniform3fv(glGetUniformLocation(shader.Program, "lightPos"), 1, &lightPos[0]);
-		glUniform3fv(glGetUniformLocation(shader.Program, "viewPos"), 1, &get_position()[0]);
+		shader.setVec3("lightPos",lightPos);
+		shader.setVec3("viewPos",get_position());
 		// Enable/Disable shadows by pressing 'SPACE'
-		glUniform1i(glGetUniformLocation(shader.Program, "shadows"), get_shadow_option());
-		glUniform1f(glGetUniformLocation(shader.Program, "far_plane"), far);
+		shader.setBool("shadows", get_shadow_option());
+		shader.setFloat("far_plane", far);
 		// Enable/Disable normal mapping by pressing 'n'
-		glUniform1i(glGetUniformLocation(shader.Program, "normalMapping"), get_normal_map_option());
-		/*glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, woodTexture);*/
+		shader.setBool("normalMapping", get_normal_map_option());
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
 		screen_buffer.bind_to_our_framebuffer();
@@ -134,6 +136,7 @@ int main()
 		screen_buffer.draw();
 		// Swap the buffers
 		glfwSwapBuffers(window);
+		show_fps(window);
 	}
 
 	glfwTerminate();

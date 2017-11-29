@@ -26,13 +26,29 @@ uniform vec3 viewPos;
 
 
 // array of offset direction for sampling
-vec3 gridSamplingDisk[20] = vec3[]
+vec3 gridSamplingDisk[80] = vec3[]
 (
-   vec3(1, 1, 1), vec3(1, -1, 1), vec3(-1, -1, 1), vec3(-1, 1, 1), 
+   vec3(1.2, 1, 1), vec3(1, -1.2, 1), vec3(-1, -1, 1), vec3(-1.2, 1.2, 1), 
    vec3(1, 1, -1), vec3(1, -1, -1), vec3(-1, -1, -1), vec3(-1, 1, -1),
-   vec3(1, 1, 0), vec3(1, -1, 0), vec3(-1, -1, 0), vec3(-1, 1, 0),
-   vec3(1, 0, 1), vec3(-1, 0, 1), vec3(1, 0, -1), vec3(-1, 0, -1),
-   vec3(0, 1, 1), vec3(0, -1, 1), vec3(0, -1, -1), vec3(0, 1, -1)
+   vec3(1.2, 1, 0), vec3(1, -1.2, 0), vec3(-1, -1, 0), vec3(-1, 1, 0),
+   vec3(1, 0, 1), vec3(-1, 0, 1), vec3(1.2, 0, -1), vec3(-1, 0, -1),
+   vec3(0, 1.2, 1), vec3(0, -1, 1), vec3(0, -1.2, -1.2), vec3(0, 1, -1),//
+   vec3(2, 2, 2), vec3(2, -2.2, 2), vec3(-2, -2.2, 2), vec3(-2, 2, 2), 
+   vec3(2, 2.2, -2), vec3(2.2, -2, -2.2), vec3(-2, -2, -2), vec3(-2, 2, -2),
+   vec3(2.2, 2.2, 0), vec3(2, -2, 0), vec3(-2, -2.2, 0), vec3(-2, 2.2, 0),
+   vec3(2.2, 0, 2), vec3(-2.2, 0, 2), vec3(2, 0, -2.2), vec3(-2.2, 0, -2),
+   vec3(0, 2, 2), vec3(0, -2.2, 2), vec3(0, -2.2, -2), vec3(0, 2, -2),//
+   vec3(3.2, 3, 3), vec3(3.2, -3, 3), vec3(-3.2, -3, 3), vec3(-3, 3.2, 3.2), 
+   vec3(3.2, 3, -3), vec3(3, -3.2, -3.2), vec3(-3, -3, -3), vec3(-3, 3, -3),
+   vec3(3, 3.2, 0), vec3(3, -3.2, 0), vec3(-3.2, -3, 0), vec3(-3, 3, 0),
+   vec3(3.2, 0, 3), vec3(-3, 0, 3), vec3(3.2, 0, -3), vec3(-3, 0, -3),
+   vec3(0, 3, 3), vec3(0, -3, 3), vec3(0, -3, -3), vec3(0, 3, -3),//
+   vec3(4.2, 4, 4), vec3(4.2, -4, 4), vec3(-4, -4.2, 4), vec3(-4, 4, 4), 
+   vec3(4, 4.2, -4), vec3(4, -4.2, -4.2), vec3(-4.2, -4.2, -4), vec3(-4, 4, -4),
+   vec3(4, 4, 0), vec3(4.2, -4, 0), vec3(-4.2, -4.2, 0), vec3(-4, 4, 0),
+   vec3(4, 0, 4.2), vec3(-4.2, 0, 4), vec3(4.2, 0, -4), vec3(-4, 0, -4),
+   vec3(0, 4.2, 4), vec3(0, -4.2, 4), vec3(0, -4, -4.2), vec3(0, 4, -4.2)
+
 );
 
 
@@ -50,6 +66,7 @@ float ShadowCalculation(vec3 fragPos)
     // float bias = 0.05; // We use a much larger bias since depth is now in [near_plane, far_plane] range
     // float shadow = currentDepth -  bias > closestDepth ? 1.0 : 0.0;
     // PCF
+	/*
      float shadow = 0.0;
      float bias = 0.05; 
      float samples = 4.0;
@@ -62,28 +79,35 @@ float ShadowCalculation(vec3 fragPos)
              {
                  float closestDepth = texture(depthMap, fragToLight + vec3(x, y, z)).r; // Use lightdir to lookup cubemap
                  closestDepth *= far_plane;   // Undo mapping [0;1]
-                 if(currentDepth - bias > closestDepth)
-                     shadow += 1.0;
+                 if(currentDepth - bias > closestDepth){
+					shadow += 1.0;
+				 }
+                     
              }
          }
      }
-     shadow /= (samples * samples * samples);
+	  shadow /= (samples * samples * samples);
+	 */
+    
 
-	/*
+	
     float shadow = 0.0;
     float bias = 0.15;
-    int samples = 20;
+    int samples = 80;
     float viewDistance = length(viewPos - fragPos);
-    float diskRadius = (1.0 + (viewDistance / far_plane)) / 25.0;
+    //float diskRadius = (1.0 + (viewDistance / far_plane))/ 25.0;
+	float diskRadius = 0.1;
     for(int i = 0; i < samples; ++i)
     {
         float closestDepth = texture(depthMap, fragToLight + gridSamplingDisk[i] * diskRadius).r;
         closestDepth *= far_plane;   // Undo mapping [0;1]
-        if(currentDepth - bias > closestDepth)
-            shadow += 1.0;
+        if(currentDepth - bias > closestDepth){
+			shadow += 1.0;
+		}
+            
     }
     shadow /= float(samples);
-    */
+    
 
     // Display closestDepth as debug (to visualize depth cubemap)
     //FragColor = vec4(vec3(closestDepth / far_plane), 1.0);    

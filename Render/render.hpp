@@ -23,3 +23,4 @@ GLfloat& get_delta_time();
 GLfloat& get_last_frame();
 
 void set_frame_time();
+void show_fps(GLFWwindow* window);

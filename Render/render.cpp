@@ -1,5 +1,6 @@
 #include <render.hpp>
 #include <camera.h>
+#include <sstream>
 
 namespace {
 	int SCR_WIDTH = 1600;
@@ -9,6 +10,9 @@ namespace {
 	GLfloat deltaTime = 0.0f;
 	GLfloat lastFrame = 0.0f;
 	bool glew_init = false;
+
+	int num_frames = 0;
+	int last_time = 0;
 }
 
 int get_scr_width() {
@@ -31,8 +35,8 @@ void init_glfw() {
 GLFWwindow*  create_window() {
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Render", monitor, NULL);
-	/*GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Render", NULL, NULL);*/
+	//GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Render", monitor, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Render", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	return window;
 }
@@ -98,4 +102,21 @@ void set_frame_time() {
 	GLfloat currentFrame = glfwGetTime();
 	deltaTime = currentFrame - lastFrame;
 	lastFrame = currentFrame;
+}
+
+void show_fps(GLFWwindow* window) {
+	// Measure speed
+	double current_time = glfwGetTime();
+	double delta = current_time - last_time;
+	num_frames++;
+	if (delta >= 1.0) { // If last cout was more than 1 sec ago
+						//cout<< "num_frames: "<<num_frames<<endl;
+						//cout << 1000.0/double(num_frames) << endl;
+		double fps = double(num_frames) / delta;
+		std::stringstream ss;
+		ss << "GLFW Proba" << " [" << fps << " FPS]";
+		glfwSetWindowTitle(window, ss.str().c_str());
+		num_frames = 0;
+		last_time = current_time;
+	}
 }

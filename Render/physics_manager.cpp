@@ -57,6 +57,7 @@ void PhysicsManager::add_rigid_body(Object* physics_obj){
 	groundTransform.setOrigin(btVector3(pos.x,pos.y,pos.z));
 	{
 		btScalar mass(physics_obj->get_mass());
+		printf("mass: [%lf]\n", physics_obj->get_mass());
 		//rigidbody is dynamic if and only if mass is non zero, 
 		//otherwise static
 		bool isDynamic = (mass != 0.f);
@@ -71,6 +72,7 @@ void PhysicsManager::add_rigid_body(Object* physics_obj){
 		btRigidBody::btRigidBodyConstructionInfo 
 					rbInfo(mass,myMotionState,groundShape,localInertia);
 		btRigidBody* body = new btRigidBody(rbInfo);
+		//body->setFriction(btScalar(0.9));
 		physics_obj->set_rigid_body(body);
 		//add the body to the dynamics world
 		dynamicsWorld->addRigidBody(body);

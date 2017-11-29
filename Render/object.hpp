@@ -4,20 +4,13 @@
 #include <physics_object.hpp>
 
 class Object :public IPhysicsObject {
-	//glm::mat4 model_mat;
-	
-	
+	static int num;
 public:
-	bool level = false;
-	bool gimpact = false;
-	bool physics = true;
-	Object(glm::vec3 position);
-	virtual void draw(Shader* shader);
-	void set_model(Model* model);
-	virtual ~Object() {};
+	Object(glm::vec3 position, float mass = 0.0f);
+	virtual void draw(Shader* shader)=0;
+	virtual ~Object();
 private:
-	/*void make_btConvexHullShape() override;
-	void make_btConvexTriangleMeshShape() override;*/
 protected:
-	Model* model = nullptr;
+	virtual void set_model() = 0;
+	virtual void make_btCollisionShape() = 0;
 };

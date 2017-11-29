@@ -1,0 +1,14 @@
+# Blender MTL File: 'rock.blend'
+# Material Count: 1
+
+newmtl Material
+Ns 135.294118
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.300000 0.300000 0.300000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\mihan\source\repos\Render\blender\rock\rock.png
+map_Bump ston_asfalt_hr_iov_normal.dds
