@@ -32,3 +32,4 @@ protected:
 
 void init_objects();
 void draw_objects(Shader& shader);
+void set_debug_drawer();

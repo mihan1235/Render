@@ -18,6 +18,7 @@
 #include <vector>
 
 #include <resource_manager.hpp>
+#include <physics_manager.hpp>
 #include <screen_buffer_object.hpp>
 
 // Global variables
@@ -39,6 +40,7 @@ int main()
 	setup_opengl(window);
 	//ResourceManager res_manager;
 	init_objects();
+	set_debug_drawer();
 	Shader shader = Shader("point_shadows.vert", "point_shadows.frag");
 	Shader simpleDepthShader = Shader("point_shadows_depth.vert", "point_shadows_depth.frag", "point_shadows_depth.geom");
 	// Set texture samples
@@ -81,7 +83,7 @@ int main()
 		// Check and call events
 		glfwPollEvents();
 		react_on_keys();
-		// Move light position over time
+		 //Move light position over time
 		//lightPos.z = sin(glfwGetTime() * 0.5) * 3.0;
 
 		// 0. Create depth cubemap transformation matrices
@@ -132,6 +134,9 @@ int main()
 		screen_buffer.bind_to_our_framebuffer();
 		draw_objects(shader);
 		glFlush();
+		if (get_debug_option()) {
+			draw_debug_drawer();
+		}
 		screen_buffer.bind_to_default_framebuffer();
 		screen_buffer.draw();
 		// Swap the buffers

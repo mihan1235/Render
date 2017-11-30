@@ -9,3 +9,4 @@ void react_on_keys();
 GLboolean& get_shadow_option();
 GLboolean& get_normal_map_option();
 GLboolean& get_effect_option();
+GLboolean get_debug_option();

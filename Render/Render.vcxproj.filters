@@ -165,5 +165,7 @@
     <None Include="resources\point_shadows_depth.vert" />
     <None Include="resources\screen_buffer_fragment_shader.frag" />
     <None Include="resources\screen_buffer_vertex_shader.vert" />
+    <None Include="resources\bt_debug_drawer.vert" />
+    <None Include="resources\bt_debug_drawer.frag" />
   </ItemGroup>
 </Project>

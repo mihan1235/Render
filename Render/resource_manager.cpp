@@ -14,6 +14,7 @@ using namespace glm;
 
 namespace{
 	ResourceManager res_manager;
+	BtDebugDrawer* m_pDebugDrawer;
 }
 
 
@@ -56,10 +57,10 @@ void ResourceManager::init_objects() {
 	object_arr.push_back(new Cube(vec3(10.0f, 13.0f, 4.0), 5.0f));
 	///////////////////////////////////////////////
 	object_arr.push_back(new Zil_131(vec3(-6.0f, 3.0f, 0.0)));
+	///////////////////////////////////////////////////
+	//object_arr.push_back(new TrashBenzovozGazLod(vec3(-2.0f, 1.0f, 4.0f)));
 	/////////////////////////////////////////////////
-	object_arr.push_back(new TrashBenzovozGazLod(vec3(-2.0f, 1.0f, 4.0f)));
-	///////////////////////////////////////////////
-	object_arr.push_back(new Moskvitch_u_01(vec3(-2.0f, 10.2f, -9.0f)));
+	//object_arr.push_back(new Moskvitch_u_01(vec3(-2.0f, 10.2f, -9.0f)));
 	///////////////////////////////////////////////
 	object_arr.push_back(new Rock(vec3(4.0f, 15.0f, 0.0), 5.0f));
 	///////////////////////////////////////////////
@@ -80,6 +81,7 @@ ResourceManager::~ResourceManager(){
 			delete object;
 		}
 	}
+	delete m_pDebugDrawer;
 }
 
 void init_objects() {
@@ -90,4 +92,9 @@ void init_objects() {
 void draw_objects(Shader& shader) {
 	//start_simulation_step();
 	res_manager.draw_objects(shader);
+}
+
+void set_debug_drawer() {
+	m_pDebugDrawer = new BtDebugDrawer();
+	set_debug_drawer(m_pDebugDrawer);
 }

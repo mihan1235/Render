@@ -1,11 +1,14 @@
 
 #include <render.hpp>
 #include<poll_events.hpp>
+#include <physics_manager.hpp>
 namespace {
 	// Options
 	GLboolean shadows = true;
 	GLboolean normalMapping = true;
 	GLboolean effect = false;
+	GLboolean DBG_DrawWireframe = false;
+	GLboolean DBG_DrawAabb = false;
 }
 
 
@@ -14,6 +17,7 @@ bool keys[1024];
 bool keysPressed[1024];
 Camera& camera = get_camera();
 GLfloat& deltaTime = get_delta_time();
+
 
 // Moves/alters the camera positions based on user input
 void react_on_keys()
@@ -44,6 +48,19 @@ void react_on_keys()
 	{
 		effect = !effect;
 		keysPressed[GLFW_KEY_V] = true;
+	}
+	BtDebugDrawer* m_pDebugDrawer = get_debug_drawer();
+	if (keys[GLFW_KEY_U] && !keysPressed[GLFW_KEY_U])
+	{
+		DBG_DrawWireframe = !DBG_DrawWireframe;
+		m_pDebugDrawer->ToggleDebugFlag(btIDebugDraw::DBG_DrawWireframe);
+		keysPressed[GLFW_KEY_U] = true;
+	}
+	if (keys[GLFW_KEY_I] && !keysPressed[GLFW_KEY_I])
+	{
+		DBG_DrawAabb = !DBG_DrawAabb;
+		m_pDebugDrawer->ToggleDebugFlag(btIDebugDraw::DBG_DrawAabb);
+		keysPressed[GLFW_KEY_I] = true;
 	}
 }
 
@@ -100,4 +117,13 @@ GLboolean& get_normal_map_option() {
 
 GLboolean& get_effect_option() {
 	return effect;
+}
+
+GLboolean get_debug_option() {
+	if (DBG_DrawWireframe | DBG_DrawAabb) {
+		return true;
+	}
+	else {
+		false;
+	}
 }

@@ -24,9 +24,9 @@ void Cube::set_model() {
 }
 
 void Cube::make_btCollisionShape() {
-	//shape = new btBoxShape(btVector3(1.1, 1.1, 1.1));
+	shape = new btBoxShape(btVector3(1.1, 1.1, 1.1));
 	
-	vector<btVector3>& points = model->get_physics_vertex_array_ref();
+	/*vector<btVector3>& points = model->get_physics_vertex_array_ref();
 	vector<int>& indices = model->get_physics_indices_array_ref();
 	if (shape == nullptr) {
 		shape = get_btConvexHullShape(points);
@@ -36,7 +36,7 @@ void Cube::make_btCollisionShape() {
 		printf("Points:[%i]\n", points.size());
 		printf("                                   ");
 		printf("Indices:[%i]\n", indices.size());
-	}
+	}*/
 	
 }
 

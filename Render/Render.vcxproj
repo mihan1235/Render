@@ -183,6 +183,8 @@
     <ClCompile Include="zil_131.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\bt_debug_drawer.frag" />
+    <None Include="resources\bt_debug_drawer.vert" />
     <None Include="resources\point_shadows.frag" />
     <None Include="resources\point_shadows.vert" />
     <None Include="resources\point_shadows_depth.frag" />

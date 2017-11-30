@@ -26,11 +26,36 @@ PhysicsManager::PhysicsManager(){
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,
 					overlappingPairCache,solver,collisionConfiguration);
 	dynamicsWorld->setGravity(btVector3(0,-10,0));
+	/* create the debug drawer
+	m_pDebugDrawer = new BtDebugDrawer();
+	 set the initial debug level to 0
+	m_pDebugDrawer->setDebugMode(0);
+	 add the debug drawer to the world
+	m_pDebugDrawer->ToggleDebugFlag(btIDebugDraw::DBG_DrawWireframe);
+	dynamicsWorld->setDebugDrawer(m_pDebugDrawer);*/
+	
 };
+
+void PhysicsManager::set_debug_drawer(BtDebugDrawer* DebugDrawer) {
+	// create the debug drawer
+	m_pDebugDrawer = DebugDrawer;
+	// set the initial debug level to 0
+	m_pDebugDrawer->setDebugMode(0);
+	// add the debug drawer to the world
+	dynamicsWorld->setDebugDrawer(m_pDebugDrawer);
+}
+
+void PhysicsManager::draw_debug_drawer() {
+	if (m_pDebugDrawer != nullptr) {
+		dynamicsWorld->debugDrawWorld();
+	}
+}
 
 void PhysicsManager::start_simulation_step(){
 	//dynamicsWorld->stepSimulation(get_delta_time()/3,10);
 	dynamicsWorld->stepSimulation(get_delta_time()/6, 10);
+	
+	
 	//for (int j=dynamicsWorld->getNumCollisionObjects()-1; j>=0 ;j--)
 		//{
 			//btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
@@ -119,3 +144,20 @@ void start_simulation_step() {
 void add_rigid_body(Object* physics_obj) {
 	physics_manager.add_rigid_body(physics_obj);
 }
+
+BtDebugDrawer* PhysicsManager::get_debug_drawer() {
+	return m_pDebugDrawer;
+}
+
+BtDebugDrawer* get_debug_drawer() {
+	return physics_manager.get_debug_drawer();
+}
+
+void set_debug_drawer(BtDebugDrawer* obj) {
+	physics_manager.set_debug_drawer(obj);
+}
+
+void draw_debug_drawer() {
+	physics_manager.draw_debug_drawer();
+}
+
