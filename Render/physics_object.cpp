@@ -237,3 +237,13 @@ IPhysicsObject::~IPhysicsObject(){
 glm::vec3 IPhysicsObject::get_default_position(){
 	return default_position;
 }
+
+btTransform IPhysicsObject::get_default_btTransform() {
+	btTransform transform;
+	transform.setIdentity();
+	transform.setOrigin(btVector3(default_position.x, default_position.y, default_position.z));
+	//btQuaternion trans = btQuaternion();
+	//trans.setRotation(btVector3(0.0, 0.0, 1.0),btScalar(45.0f));
+	//transform.setRotation(trans);
+	return transform;
+}

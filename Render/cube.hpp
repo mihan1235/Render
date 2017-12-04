@@ -11,6 +11,7 @@ public:
 	~Cube();
 	Cube(glm::vec3 position, float mass = 0.0f);
 	btCollisionShape* get_shape() override;
+	btTransform get_default_btTransform() override;
 protected:
 	void set_model() override;
 	void make_btCollisionShape() override;

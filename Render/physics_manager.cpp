@@ -48,6 +48,7 @@ void PhysicsManager::set_debug_drawer(BtDebugDrawer* DebugDrawer) {
 void PhysicsManager::draw_debug_drawer() {
 	if (m_pDebugDrawer != nullptr) {
 		dynamicsWorld->debugDrawWorld();
+		m_pDebugDrawer->draw();
 	}
 }
 
@@ -76,10 +77,8 @@ void PhysicsManager::start_simulation_step(){
 void PhysicsManager::add_rigid_body(Object* physics_obj){
 	btCollisionShape* groundShape = physics_obj->get_shape();
 	collisionShapes.push_back(groundShape);
-	btTransform groundTransform;
-	groundTransform.setIdentity();
-	glm::vec3 pos=physics_obj->get_default_position();
-	groundTransform.setOrigin(btVector3(pos.x,pos.y,pos.z));
+	btTransform groundTransform = physics_obj->get_default_btTransform();
+	
 	{
 		btScalar mass(physics_obj->get_mass());
 		printf("mass: [%lf]\n", physics_obj->get_mass());
@@ -94,9 +93,11 @@ void PhysicsManager::add_rigid_body(Object* physics_obj){
 		//capabilities, and only synchronizes 'active' objects
 		btDefaultMotionState* myMotionState = 
 							new btDefaultMotionState(groundTransform);
+		//myMotionState->setWorldTransform(groundTransform);
 		btRigidBody::btRigidBodyConstructionInfo 
 					rbInfo(mass,myMotionState,groundShape,localInertia);
 		btRigidBody* body = new btRigidBody(rbInfo);
+		//body->setWorldTransform(groundTransform);
 		//body->setFriction(btScalar(0.9));
 		physics_obj->set_rigid_body(body);
 		//add the body to the dynamics world

@@ -14,3 +14,4 @@ protected:
 	virtual void set_model() = 0;
 	virtual void make_btCollisionShape() = 0;
 };
+

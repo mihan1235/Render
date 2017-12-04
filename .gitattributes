@@ -4,3 +4,7 @@
 /Render/ext/assimp/libs/assimp-vc140-mt.pdb filter=lfs diff=lfs merge=lfs -text
 /Render/ext/assimp/libs/Debug/assimp-vc140-mt.ilk filter=lfs diff=lfs merge=lfs -text
 /Render/ext/assimp/libs/Debug/assimp-vc140-mt.pdb filter=lfs diff=lfs merge=lfs -text
+/Render/resources/l01_escape/l01_escape.blend filter=lfs diff=lfs merge=lfs -text
+/Render/resources/l01_escape/l01_escape.blend1 filter=lfs diff=lfs merge=lfs -text
+/x64/Release/l01_escape/l01_escape.blend filter=lfs diff=lfs merge=lfs -text
+/x64/Release/l01_escape/l01_escape.blend1 filter=lfs diff=lfs merge=lfs -text
