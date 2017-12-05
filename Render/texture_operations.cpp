@@ -3,6 +3,10 @@
 #include <FreeImage.h>
 #include <render.hpp>
 
+#include <iostream>
+
+using std::vector;
+
 // This function loads a texture from file. Note: texture loading functions like these are usually 
 // managed by a 'Resource Manager' that manages all resources (like textures, models, audio). 
 // For learning purposes we'll just define it as a utility function.
@@ -72,5 +76,56 @@ GLuint generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
+	return textureID;
+}
+
+// loads a cubemap texture from 6 individual texture faces
+// order:
+// +X (right)
+// -X (left)
+// +Y (top)
+// -Y (bottom)
+// +Z (front) 
+// -Z (back)
+// -------------------------------------------------------
+
+unsigned int loadCubemap(vector<std::string> faces)
+{
+	unsigned int textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+	int width, height, nrChannels;
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	for (unsigned int i = 0; i < faces.size(); i++)
+	{
+		FREE_IMAGE_FORMAT format = FreeImage_GetFileType(faces[i].c_str(), 0);
+		FIBITMAP* image = FreeImage_Load(format, faces[i].c_str());
+		FIBITMAP* temp = image;
+		image = FreeImage_ConvertTo32Bits(image);
+		FreeImage_Unload(temp);
+		int width_tex = FreeImage_GetWidth(image);
+		int height_tex = FreeImage_GetHeight(image);
+		FreeImage_FlipVertical(image);
+		GLubyte* data = FreeImage_GetBits(image);
+		
+		if (data)
+		{
+			//glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width_tex, height_tex, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, width_tex, height_tex, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
+		}
+		else
+		{
+			std::cout << "Cubemap texture failed to load at path: " << faces[i].c_str() << std::endl;
+		}
+		FreeImage_Unload(image);
+	}
+	
+	
 	return textureID;
 }

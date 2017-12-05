@@ -6,6 +6,7 @@
 
 int get_scr_width();
 int get_scr_height();
+GLfloat get_zoom();
 void init_glfw();
 GLFWwindow* create_window();
 void set_callback_functions(GLFWwindow* window);
@@ -16,6 +17,8 @@ void setup_opengl(GLFWwindow* window);
 glm::mat4 get_projection();
 glm::mat4 get_view_matrix();
 glm::vec3 get_position();
+glm::vec3 get_front();
+glm::vec3 get_up();
 
 Camera& get_camera();
 

@@ -167,5 +167,7 @@
     <None Include="resources\screen_buffer_vertex_shader.vert" />
     <None Include="resources\bt_debug_drawer.vert" />
     <None Include="resources\bt_debug_drawer.frag" />
+    <None Include="resources\skybox.vert" />
+    <None Include="resources\skybox.frag" />
   </ItemGroup>
 </Project>

@@ -97,6 +97,14 @@ GLfloat& get_last_frame() {
 	return lastFrame;
 }
 
+glm::vec3 get_front() {
+	return camera.Front;
+}
+
+glm::vec3 get_up() {
+	return camera.Up;
+}
+
 void set_frame_time() {
 	// Set frame time
 	GLfloat currentFrame = glfwGetTime();
@@ -119,4 +127,8 @@ void show_fps(GLFWwindow* window) {
 		num_frames = 0;
 		last_time = current_time;
 	}
+}
+
+GLfloat get_zoom() {
+	return camera.Zoom;
 }

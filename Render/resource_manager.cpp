@@ -56,11 +56,11 @@ void ResourceManager::init_objects() {
 	object_arr.push_back(new Cube(vec3(9.0f, 13.0f, 3.0), 5.0f));
 	object_arr.push_back(new Cube(vec3(10.0f, 13.0f, 4.0), 5.0f));
 	///////////////////////////////////////////////
-	object_arr.push_back(new Zil_131(vec3(-6.0f, 3.0f, 0.0)));
+	//object_arr.push_back(new Zil_131(vec3(-6.0f, 3.0f, 0.0)));
 	///////////////////////////////////////////////////
-	object_arr.push_back(new TrashBenzovozGazLod(vec3(-2.0f, 1.0f, 4.0f)));
+	//object_arr.push_back(new TrashBenzovozGazLod(vec3(-2.0f, 1.0f, 4.0f)));
 	/////////////////////////////////////////////////
-	object_arr.push_back(new Moskvitch_u_01(vec3(-2.0f, 10.2f, -9.0f)));
+	//object_arr.push_back(new Moskvitch_u_01(vec3(-2.0f, 10.2f, -9.0f)));
 	///////////////////////////////////////////////
 	object_arr.push_back(new Rock(vec3(4.0f, 15.0f, 0.0), 5.0f));
 	///////////////////////////////////////////////
@@ -81,7 +81,9 @@ ResourceManager::~ResourceManager(){
 			delete object;
 		}
 	}
-	delete m_pDebugDrawer;
+	if (m_pDebugDrawer != nullptr) {
+		delete m_pDebugDrawer;
+	}
 }
 
 void init_objects() {

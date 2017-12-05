@@ -21,6 +21,10 @@
 #include <physics_manager.hpp>
 #include <screen_buffer_object.hpp>
 
+#include <string>
+#include <vector>
+#include <texture_operations.hpp>
+
 // Global variables
 GLuint woodTexture;
 GLuint planeVAO;
@@ -38,7 +42,7 @@ int main()
 	set_cursor(window);
 	init_glew();
 	setup_opengl(window);
-	//ResourceManager res_manager;
+	ResourceManager res_manager;
 	init_objects();
 	set_debug_drawer();
 	Shader shader = Shader("point_shadows.vert", "point_shadows.frag");
@@ -72,10 +76,93 @@ int main()
 		
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
 	ScreenBufferObject screen_buffer;
 
+	float skyboxVertices[] = {
+		// positions          
+		-1.0f,  1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		-1.0f,  1.0f, -1.0f,
+		1.0f,  1.0f, -1.0f,
+		1.0f,  1.0f,  1.0f,
+		1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		1.0f, -1.0f,  1.0f
+	};
+
+	Shader skyboxShader = Shader("skybox.vert","skybox.frag");
+
+	// skybox VAO
+	unsigned int skyboxVAO, skyboxVBO;
+	glGenVertexArrays(1, &skyboxVAO);
+	glGenBuffers(1, &skyboxVBO);
+	glBindVertexArray(skyboxVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	// loads a cubemap texture from 6 individual texture faces
+	// order:
+	// +X (right)
+	// -X (left)
+	// +Y (top)
+	// -Y (bottom)
+	// +Z (front) 
+	// -Z (back)
+	// -------------------------------------------------------
+	std::vector<std::string> faces
+	{
+		"envmap_miramar/miramar_right.tga",
+		"envmap_miramar/miramar_left.tga",
+		"envmap_miramar/miramar_top.tga",
+		"envmap_miramar/miramar_bottom.tga",
+		"envmap_miramar/miramar_front.tga",
+		"envmap_miramar/miramar_back.tga"
+		
+	};
+	
+
+	unsigned int cubemapTexture = loadCubemap(faces);
+
+	
+
+	
+	//Camera& cam = get_camera();
 	while (!glfwWindowShouldClose(window))
 	{
 		set_frame_time();
@@ -83,6 +170,8 @@ int main()
 		// Check and call events
 		glfwPollEvents();
 		react_on_keys();
+		glClearColor(0.1f, 0.5f, 0.1f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		 //Move light position over time
 		//lightPos.z = sin(glfwGetTime() * 0.5) * 3.0;
 
@@ -98,6 +187,8 @@ int main()
 		shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, -1.0, 0.0), glm::vec3(0.0, 0.0, -1.0)));
 		shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, 0.0, 1.0), glm::vec3(0.0, -1.0, 0.0)));
 		shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0, 0.0, -1.0), glm::vec3(0.0, -1.0, 0.0)));
+		
+
 
 		// 1. Render scene to depth cubemap
 		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
@@ -111,15 +202,18 @@ int main()
 		simpleDepthShader.setVec3("lightPos", lightPos);
 		draw_objects(simpleDepthShader);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//glDrawBuffer(GL_NONE);
+		//glReadBuffer(GL_NONE);
+		
 
 		// 2. Render scene as normal 
 
 		glViewport(0, 0, get_scr_width(), get_scr_height());
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shader.Use();
-		glm::mat4 projection = get_projection();
+		//glm::mat4 projection = get_projection();
 		glm::mat4 view = get_view_matrix();
-		shader.setMat4("projection",projection);
+		shader.setMat4("projection",get_projection());
 		shader.setMat4("view",view);
 		// Set light uniforms
 		shader.setVec3("lightPos",lightPos);
@@ -137,13 +231,29 @@ int main()
 		if (get_debug_option()) {
 			draw_debug_drawer();
 		}
+		
+		/////////////////////////////////////
+		glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+		skyboxShader.Use();
+		// ... set view and projection matrix
+		skyboxShader.setMat4("view", glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f) + get_front(), get_up()));
+		GLfloat aspect_1 = get_scr_width() / get_scr_height();
+		skyboxShader.setMat4("projection", glm::perspective(get_zoom(), aspect_1, 0.1f, 1000.0f));
+		glBindVertexArray(skyboxVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+		glDepthFunc(GL_LESS); // set depth function back to default
+		///////////////////////////////////////
 		screen_buffer.bind_to_default_framebuffer();
 		screen_buffer.draw();
 		// Swap the buffers
 		glfwSwapBuffers(window);
 		show_fps(window);
 	}
-
+	glDeleteVertexArrays(1, &skyboxVAO);
+	glDeleteBuffers(1, &skyboxVBO);
 	glfwTerminate();
 	return 0;
 }
