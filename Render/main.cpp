@@ -227,7 +227,7 @@ int main()
 		glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
 		screen_buffer.bind_to_our_framebuffer();
 		draw_objects(shader);
-		glFlush();
+		//glFlush();
 		if (get_debug_option()) {
 			draw_debug_drawer();
 		}
