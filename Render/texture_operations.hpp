@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <vector>
+#include <string>
 
 GLuint load_texture(GLchar const * path);
 GLuint generateAttachmentTexture(GLboolean depth, GLboolean stencil);

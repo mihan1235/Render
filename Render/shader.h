@@ -7,7 +7,7 @@
 #include <sstream>
 #include <iostream>
 #include <string>
-#include <glm\glm.hpp>
+#include <glm.hpp>
 
 class Shader
 {
